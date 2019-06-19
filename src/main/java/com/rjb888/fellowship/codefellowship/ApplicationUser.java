@@ -1,13 +1,19 @@
 package com.rjb888.fellowship.codefellowship;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Collection;
 
 @Entity
-public class ApplicationUser {
+public class ApplicationUser implements UserDetails {
     String username;
     String password;
     String firstName;
@@ -18,6 +24,8 @@ public class ApplicationUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
+
+
 
     public ApplicationUser(){};
 
@@ -40,8 +48,33 @@ public class ApplicationUser {
         return username;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 
     public String getPassword() {
