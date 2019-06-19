@@ -22,24 +22,34 @@ public class CodeFellowshipController {
         return "Code Fellowship";
     }
 
+    @GetMapping("/login")
+    public String getLogin(){
+       return "Login";
+    }
+
+//    @PostMapping("/login")
+//    public RedirectView login(@RequestParam String userName, @RequestParam String password){
+//
+//    }
+
    @GetMapping("/signup")
-   public String getLogin(){
+   public String getSignUp(){
       return "SignUp";
    }
 
-   @PostMapping("/signup")
-    public RedirectView signUp(@RequestParam String userName,
-                               @RequestParam String password,
-                               @RequestParam String firstName,
-                               @RequestParam String lastName,
-                               @RequestParam String dateOfBirth,
-                               @RequestParam String bio){
-       ApplicationUser newUser = new ApplicationUser(userName,
-               password, firstName, lastName, dateOfBirth,
-               bio);
-       System.out.println(newUser);
-       applicationUserRepository.save(newUser);
-       return new RedirectView("/");
-   }
+//   @PostMapping("/signup")
+//    public RedirectView signUp(@RequestParam String userName,
+//                               @RequestParam String password,
+//                               @RequestParam String firstName,
+//                               @RequestParam String lastName,
+//                               @RequestParam String dateOfBirth,
+//                               @RequestParam String bio){
+//       ApplicationUser newUser = new ApplicationUser(userName,
+//               password, firstName, lastName, dateOfBirth,
+//               bio);
+//       System.out.println(newUser);
+//       applicationUserRepository.save(newUser);
+//       return new RedirectView("/");
+//   }
 
 }
