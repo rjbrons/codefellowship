@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public interface ApplicationUserRepository extends CrudRepository<ApplicationUser, Long> {
-    ApplicationUser findByUserName(String username);
+    ApplicationUser findByUsername(String username);
 }

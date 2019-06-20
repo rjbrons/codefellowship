@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/style.css" rel="stylesheet"/>
+
+
+</head>
+<body>
+<ul>
+    <img src="http://placehold.it/100"/>
+    <li th:text="${user.firstName}"></li>
+    <li th:text="${user.lastName}"></li>
+    <li th:text="${user.bio}"></li>
+    <li th:text="${user.dateOfBirth}"></li>
+</ul>
+</body>
+</html>

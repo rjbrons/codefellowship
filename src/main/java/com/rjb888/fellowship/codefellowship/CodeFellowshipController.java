@@ -3,10 +3,13 @@ package com.rjb888.fellowship.codefellowship;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.security.Principal;
 
 @Controller
 public class CodeFellowshipController {
@@ -21,35 +24,19 @@ public class CodeFellowshipController {
    public String getCodeFellowship(){
         return "Code Fellowship";
     }
-
     @GetMapping("/login")
     public String getLogin(){
        return "Login";
     }
-
-//    @PostMapping("/login")
-//    public RedirectView login(@RequestParam String userName, @RequestParam String password){
-//
-//    }
-
    @GetMapping("/signup")
    public String getSignUp(){
       return "SignUp";
    }
-
-//   @PostMapping("/signup")
-//    public RedirectView signUp(@RequestParam String userName,
-//                               @RequestParam String password,
-//                               @RequestParam String firstName,
-//                               @RequestParam String lastName,
-//                               @RequestParam String dateOfBirth,
-//                               @RequestParam String bio){
-//       ApplicationUser newUser = new ApplicationUser(userName,
-//               password, firstName, lastName, dateOfBirth,
-//               bio);
-//       System.out.println(newUser);
-//       applicationUserRepository.save(newUser);
-//       return new RedirectView("/");
-//   }
-
+   @GetMapping("/users")
+    public String myProfile(Principal p, Model m){
+       Iterable<ApplicationUser> userList = applicationUserRepository.findAll();
+       m.addAttribute("users", userList);
+       m.addAttribute("principal", p);
+       return "UserProfile";
+   }
 }
