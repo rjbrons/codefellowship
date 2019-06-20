@@ -13,6 +13,14 @@
     <li th:text="${user.lastName}"></li>
     <li th:text="${user.bio}"></li>
     <li th:text="${user.dateOfBirth}"></li>
+    <div>
+        <h2>Make a new Post: </h2>
+        <form method="POST" action="/myprofile">
+            <textarea name="post"></textarea>
+            <input type="submit"/><br>
+        </form>
+    </div>
+
 </ul>
 </body>
 </html>
