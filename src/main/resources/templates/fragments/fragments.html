@@ -5,12 +5,20 @@
     <title>Title</title>
 </head>
 
-<header th:fragment=""></header>
-
-
-
-
 <body>
+<header></header>
+<!--  make a fragment that is named 'nav'-->
+<nav th:fragment="nav(user)">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a th:unless="${user}" href="/signup">Sign Up Here</a></li>
+        <li><a th:unless="${user}" href="/login">Login</a></li>
+        <li><a th:if=${user} href="/logout">Log Out</a></li>
+    </ul>
+</nav>
 
+<div th:fragment="greeting(me)">
+    <h2 th:if="${me}">Welcome Back [[${me.firstName}]]</h2>
+</div>
 </body>
 </html>

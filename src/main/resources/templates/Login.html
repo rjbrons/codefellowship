@@ -7,6 +7,9 @@
 
 </head>
 <body>
+    <nav th:replace="fragments/fragments :: nav(${user})"></nav>
+    <h2 th:replace="fragments/fragments :: greeting(me=${user})"></h2>
+
     <form action="/login" method="POST" >
         UserName: <input type="text" placeholder="User Name" name="username" />
         Password: <input type="text" placeholder="Password" name="password" />
