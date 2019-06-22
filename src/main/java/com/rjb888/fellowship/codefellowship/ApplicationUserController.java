@@ -42,7 +42,6 @@ public class ApplicationUserController {
                 bCryptPasswordEncoder.encode(password),
                 firstName, lastName, dateOfBirth, bio);
         applicationUserRepository.save(newUser);
-
         Authentication authentication = new UsernamePasswordAuthenticationToken(newUser, null, new ArrayList<>());
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return new RedirectView("/");

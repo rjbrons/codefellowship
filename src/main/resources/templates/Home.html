@@ -5,7 +5,8 @@
     <link href="/style.css" rel="stylesheet"/>
 </head>
 <body>
-    <nav th:replace="fragments/fragments :: nav"></nav>
+    <nav th:replace="fragments/fragments :: nav(${user})"></nav>
+    <h2 th:replace="fragments/fragments :: greeting(me=${user})"></h2>
 
     <h1>Welcome to the Code Fellowship App</h1>
 </body>

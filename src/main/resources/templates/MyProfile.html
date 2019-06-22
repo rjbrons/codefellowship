@@ -10,8 +10,8 @@
 <!-- replace this element with the element in the fragments
      folder with the name fragments.html
      using the fragment named nav-->
-<nav th:replace="fragments/fragments :: nav"></nav>
-<h2 th:replace="fragments/fragments :: greeting(me=${user.firstName})"></h2>
+<nav th:replace="fragments/fragments :: nav(${user})"></nav>
+<h2 th:replace="fragments/fragments :: greeting(me=${user})"></h2>
 <ul>
     <img src="http://placehold.it/100"/>
     <li th:text="${user.firstName}"></li>
