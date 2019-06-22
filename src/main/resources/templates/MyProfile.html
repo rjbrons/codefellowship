@@ -7,6 +7,11 @@
 
 </head>
 <body>
+<!-- replace this element with the element in the fragments
+     folder with the name fragments.html
+     using the fragment named nav-->
+<nav th:replace="fragments/fragments :: nav"></nav>
+<h2 th:replace="fragments/fragments :: greeting(me=${user.firstName})"></h2>
 <ul>
     <img src="http://placehold.it/100"/>
     <li th:text="${user.firstName}"></li>
@@ -15,10 +20,16 @@
     <li th:text="${user.dateOfBirth}"></li>
     <div>
         <h2>Make a new Post: </h2>
-        <form method="POST" action="/myprofile">
-            <textarea name="post"></textarea>
+        <form action="/myprofile" method="POST"  id="postsForm">
+            <textarea name="body" id="body" form="postsForm"></textarea>
             <input type="submit"/><br>
         </form>
+    </div>
+    <div th:each="post : ${posts}">
+        <ul >
+            <li th:text="${post.body}"></li>
+            <li th:text="${post.createdAt}"></li>
+        </ul>
     </div>
 
 </ul>

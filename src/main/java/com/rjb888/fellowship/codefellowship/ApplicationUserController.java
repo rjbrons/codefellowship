@@ -17,12 +17,16 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.jws.WebParam;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class ApplicationUserController {
 
     @Autowired
     ApplicationUserRepository applicationUserRepository;
+
+    @Autowired
+    PostRepository postRepository;
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -38,6 +42,7 @@ public class ApplicationUserController {
                 bCryptPasswordEncoder.encode(password),
                 firstName, lastName, dateOfBirth, bio);
         applicationUserRepository.save(newUser);
+
         Authentication authentication = new UsernamePasswordAuthenticationToken(newUser, null, new ArrayList<>());
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return new RedirectView("/");
@@ -46,13 +51,18 @@ public class ApplicationUserController {
     @GetMapping("/myprofile")
     public String myProfile(Principal p, Model m){
         ApplicationUser me = applicationUserRepository.findByUsername(p.getName());
+        List<Post> posts = me.myPosts;
+        System.out.println(posts.toString());
+        m.addAttribute("posts", posts);
         m.addAttribute("user", me);
         return "MyProfile";
     }
 
     @GetMapping("/user/{id}")
-    public String singleUser(@PathVariable long id, Model m){
+    public String singleUser(@PathVariable long id, Model m, Principal p){
         ApplicationUser thisUser = applicationUserRepository.findById(id).get();
+        ApplicationUser loggedIn = applicationUserRepository.findByUsername(p.getName());
+        m.addAttribute("loggedInUser", loggedIn);
         m.addAttribute("user", thisUser);
         return "SingleUser";
     }

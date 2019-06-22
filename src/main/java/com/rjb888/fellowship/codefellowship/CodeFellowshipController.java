@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.jws.WebParam;
 import java.security.Principal;
 
 @Controller
@@ -29,7 +30,9 @@ public class CodeFellowshipController {
        return "Login";
     }
    @GetMapping("/signup")
-   public String getSignUp(){
+   public String getSignUp(Principal p, Model m){
+       ApplicationUser loggedIn = applicationUserRepository.findByUsername(p.getName());
+       m.addAttribute("user", loggedIn);
       return "SignUp";
    }
    @GetMapping("/users")

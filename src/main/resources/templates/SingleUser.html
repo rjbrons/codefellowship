@@ -8,6 +8,9 @@
 
 </head>
 <body>
+<nav th:replace="fragments/fragments :: nav"></nav>
+<h2 th:replace="fragments/fragments :: greeting(me=${loggedInUser.firstName})"></h2>
+
 <ul>
     <img src="http://placehold.it/100"/>
     <li th:text="${user.firstName}"></li>

@@ -7,6 +7,8 @@
 
 </head>
 <body>
+    <nav th:replace="fragments/fragments :: nav"></nav>
+
     <form action="/login" method="POST" >
         UserName: <input type="text" placeholder="User Name" name="username" />
         Password: <input type="text" placeholder="Password" name="password" />

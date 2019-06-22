@@ -7,6 +7,8 @@
 
 </head>
 <body>
+<nav th:replace="fragments/fragments :: nav"></nav>
+
     <ul th:each="user : ${users}">
         <img src="http://placehold.it/100"/>
         <li th:text="${user.firstName}"></li>
