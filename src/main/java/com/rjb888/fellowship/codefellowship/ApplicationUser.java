@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -23,6 +24,13 @@ public class ApplicationUser implements UserDetails {
     @OneToMany(mappedBy = "owner")
     List<Post> myPosts;
 
+    @ManyToMany
+    Set<ApplicationUser> following;
+
+
+    public long getId() {
+        return id;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -45,6 +53,7 @@ public class ApplicationUser implements UserDetails {
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.bio = bio;
+
     }
 
     public String getUsername() {
@@ -118,5 +127,13 @@ public class ApplicationUser implements UserDetails {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public Set<ApplicationUser> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(Set<ApplicationUser> following) {
+        this.following = following;
     }
 }

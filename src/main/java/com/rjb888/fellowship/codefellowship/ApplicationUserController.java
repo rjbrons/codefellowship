@@ -47,14 +47,29 @@ public class ApplicationUserController {
         return new RedirectView("/");
     }
 
+    @PostMapping("/follow")
+    public RedirectView addFollower(Long followee, Principal p, Model m){
+        ApplicationUser loggedIn = applicationUserRepository.findByUsername(p.getName());
+        loggedIn.following.add(applicationUserRepository.findById(followee).get());
+        applicationUserRepository.save(loggedIn);
+        return new RedirectView("/feed");
+    }
+
     @GetMapping("/myprofile")
     public String myProfile(Principal p, Model m){
         ApplicationUser me = applicationUserRepository.findByUsername(p.getName());
         List<Post> posts = me.myPosts;
-        System.out.println(posts.toString());
         m.addAttribute("posts", posts);
         m.addAttribute("user", me);
         return "MyProfile";
+    }
+
+    @GetMapping("/feed")
+    public String getNewsFeed(Principal p, Model m){
+        Iterable<ApplicationUser> allUsers = applicationUserRepository.findAll();
+        System.out.println(allUsers);
+        m.addAttribute("users", allUsers);
+        return "feed";
     }
 
     @GetMapping("/user/{id}")

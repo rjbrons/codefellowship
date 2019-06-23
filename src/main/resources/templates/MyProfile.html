@@ -12,6 +12,7 @@
      using the fragment named nav-->
 <nav th:replace="fragments/fragments :: nav(${user})"></nav>
 <h2 th:replace="fragments/fragments :: greeting(me=${user})"></h2>
+<h3><a href="/feed">My Feed</a></h3>
 <ul>
     <img src="http://placehold.it/100"/>
     <li th:text="${user.firstName}"></li>
