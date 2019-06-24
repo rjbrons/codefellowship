@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Feed</title>
+    <link href="/style.css" rel="stylesheet"/>
+
+</head>
+<body>
+<nav th:replace="fragments/fragments :: nav(user=${user})"></nav>
+
+<h2 th:replace="fragments/fragments :: greeting(me=${user})"></h2>
+<h1>My Newsfeed</h1>
+<p>Follow Other Users:</p>
+<form method="POST" action="/follow">
+    <select name="followee">
+        <option th:each="user : ${users}" th:value="${user.getId()}">[[${user.firstName}]]</option>
+    </select>
+    <input type="submit" value="Follow"/>
+</form>
+
+<div>News Feed: </div>
+<div th:if="${user.following}" th:each="dude : ${user.following}">
+    <p>[[${dude.firstName}]] [[${dude.lastName}]]</p>
+    <p th:each="post : ${dude.myPosts}" ><span th:text="${post.body}" ></span>
+    </p>
+</div>
+<div th:each="post : ${posts}">
+    <ul >
+        <li th:text="${post.body}"></li>
+        <li th:text="${post.createdAt}"></li>
+        <li>[</li>
+    </ul>
+</div>
+
+
+</body>
+</html>
