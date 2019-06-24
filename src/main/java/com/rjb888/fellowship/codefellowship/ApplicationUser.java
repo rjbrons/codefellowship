@@ -21,6 +21,8 @@ public class ApplicationUser implements UserDetails {
     String dateOfBirth;
     String bio;
 
+
+
     @OneToMany(mappedBy = "owner")
     List<Post> myPosts;
 
@@ -136,4 +138,13 @@ public class ApplicationUser implements UserDetails {
     public void setFollowing(Set<ApplicationUser> following) {
         this.following = following;
     }
+
+    public List<Post> getMyPosts() {
+        return myPosts;
+    }
+
+    public void setMyPosts(List<Post> myPosts) {
+        this.myPosts = myPosts;
+    }
+
 }

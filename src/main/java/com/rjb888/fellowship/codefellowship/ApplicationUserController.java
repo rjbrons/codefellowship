@@ -67,8 +67,8 @@ public class ApplicationUserController {
     @GetMapping("/feed")
     public String getNewsFeed(Principal p, Model m){
         Iterable<ApplicationUser> allUsers = applicationUserRepository.findAll();
-        System.out.println(allUsers);
         m.addAttribute("users", allUsers);
+        m.addAttribute("user", applicationUserRepository.findByUsername(p.getName()));
         return "feed";
     }
 
